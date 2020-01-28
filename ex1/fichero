@@ -1,0 +1,8 @@
+import re
+
+nombreFich=input("Nombre del archivo:")
+f = open(nombreFich, "r")
+x=f.read().split()
+#print (x)
+x.sort()
+print(x)
