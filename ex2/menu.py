@@ -1,4 +1,5 @@
 import sys
+from datetime import time
 
 from ex2.client import Client
 from ex2.libreta import Libreta
@@ -7,20 +8,20 @@ from ex2.libreta import Libreta
 class Menu:
     def __init__(self):
         self.choices_menu = {
-                "1": Client.new_client(Client(),"name", "cognom", "telefon", "correu", "adreca", "ciutat"),
-                "2": Libreta.remove_client,
-                "3": self.get_consulta,
-#                "4": Libreta.modifique_client,
-                "5": self.quit
-                }
+            "1": Client.new_client(self),
+            "2": Libreta.remove_client(self),
+            "3": self.get_consulta,
+            "4": Client.modifique_client(),
+            "5": self.quit
+        }
         self.choices_consulta = {
- #               "1": self.search_client_id,
- #               "2": self.search_client_name,
- #               "3": self.search_client_last_name,
- #               "4": self.list_clients,
- #               "5": self.list_clients_name,
-                "6": self.quit
-                }
+            #               "1": self.search_client_id,
+            #               "2": self.search_client_name,
+            #               "3": self.search_client_last_name,
+            "4": Libreta.get_llista_clients(self),
+            #               "5": self.list_clients_name,
+            "6": self.quit
+        }
 
     def display_menu(self):
         print("""
@@ -40,15 +41,13 @@ Menu consuta
 =========================================
 Seleciona una opcion y presiona "Intro"
 =========================================
-1. Buscar cliente por Id
-2. Buscar cliente por nombre
-3. Buscar cliente por apellido
-4. Listar todos los clientes
-5. Listar todos los clientes por nombre
-6. Quit
+\t1. Buscar cliente por Id
+\t2. Buscar cliente por nombre
+\t3. Buscar cliente por apellido
+\t4. Listar todos los clientes
+\t5. Listar todos los clientes por nombre
+\t6. Quit
 """)
-
-
 
     def get_principal(self):
         while True:
@@ -57,23 +56,20 @@ Seleciona una opcion y presiona "Intro"
             action = self.choices_menu.get(option)
             if action:
                 action()
+                time.sleep(5)
             else:
                 print("{0} is not a valid choice".format(option))
+
     def get_consulta(self):
         while True:
             self.display_menu_consulta()
-            choice = input("Enter an option: ")
-            action = self.choices_consulta.get(choice)
+            option = input("Enter an option: ")
+            action = self.choices_consulta.get(option)
             if action:
                 action()
+                time.sleep(5)
             else:
-                print("{0} is not a valid choice".format(choice))
-
-
-
-
-
-
+                print("{0} is not a valid choice".format(option))
 
     def show_notes(self, notes=None):
         if not notes:
@@ -107,5 +103,3 @@ Seleciona una opcion y presiona "Intro"
 
 #    if __name__ == "__main__":
 #        Menu().get_principal()
-
-
