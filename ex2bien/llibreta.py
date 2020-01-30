@@ -1,18 +1,13 @@
-import datetime
 from ex2bien.client import Client
-# Store the next available id for all new notes
+
 class Llibreta:
-    '''Represent a collection of notes that can be tagged,
-    modified, and searched.'''
 
     def __init__(self):
-        '''Initialize a notebook with an empty list.'''
-        self.customers = []
+        self.clientes = []
 
-    def new_client(self,client):
-        '''Create a new client and add it to the list.'''
-        self.customers.append(client)
-    
+    def new_client(self, client):
+        self.clientes.append(client)
+
     @classmethod
     def datos_cliente(self):
         nom = input('Introduce el nombre de cliente: ')
@@ -21,49 +16,73 @@ class Llibreta:
         correu = input('Introduce el correo de cliente: ')
         adreca = input('Introduce la direccion de cliente: ')
         ciutat = input('Introduce la ciudad de cliente: ')
-        cliente  = Client(nom,cognom,telefon,correu,adreca,ciutat)
+        cliente = Client(nom, cognom, telefon, correu, adreca, ciutat)
+        print("id del cliente: ",cliente.id)
         return cliente
 
-
     def get_llista_clients(self):
-        for c in self.customers:
+        for cliente in self.clientes:
             print('****************')
-            print(c)
+            print(cliente)
             print('****************')
 
-    def delete_client(self,id):
-        for c in self.customers:
-            if int(c.id) == int(id):
-                self.customers.remove(c)
+    def get_llista_clients_order_by_name(self):
+        self.clientes.sort(key=lambda client: client.nom)
+        for cliente in self.clientes:
+            print('****************')
+            print(cliente)
+            print('****************')
 
-    
+    def delete_client(self, id):
+        clientex = ""
+        for cliente in self.clientes:
+            if int(cliente.id) == int(id):
+                liente = cliente
+        if clientex == "":
+            print("Este cliente no existe")
+        else:
+            self.clientes.remove(clientex)
+
     def clear_list(self):
-        self.customers = []
-    
-    def get_id_client(self,id):
-        for c in self.customers:
-            if int(c.id) == int(id):
-                return c 
-    
-    def search_by_id(self,id ):
-        for c in self.customers:
-            if int(c.id) == int(id):
-                print('****************')
-                print(c)
-                print('****************')
+        self.clientes = []
 
+    def get_id_client(self, id):
+        for cliente in self.clientes:
+            if int(cliente.id) == int(id):
+                return cliente
 
-    
-    def search_by_nom(self,nom ):
-        for c in self.customers:
-            if c.nom == nom:
-                print('****************')
-                print(c) 
-                print('****************')
-    
-    def search_by_cognom(self,cognom ):
-        for c in self.customers:
-            if c.cognom == cognom:
-                print('****************')
-                print(c)
-                print('****************')
+    def search_by_id(self, id):
+        clientex = ""
+        for cliente in self.clientes:
+            if int(cliente.id) == int(id):
+                clientex = cliente
+        if clientex == "":
+            print("Este cliente no existe")
+        else:
+            print('****************')
+            print(clientex)
+            print('****************')
+
+    def search_by_nom(self, nom):
+        clientex = ""
+        for cliente in self.clientes:
+            if cliente.nom == nom:
+                clientex = cliente
+        if clientex == "":
+            print("Este cliente no existe")
+        else:
+            print('****************')
+            print(clientex)
+            print('****************')
+
+    def search_by_cognom(self, cognom):
+        clientex = ""
+        for cliente in self.clientes:
+            if cliente.cognom == cognom:
+                clientex = cliente
+        if clientex == "":
+            print("Este cliente no existe")
+        else:
+            print('****************')
+            print(clientex)
+            print('****************')
