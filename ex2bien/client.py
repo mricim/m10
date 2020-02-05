@@ -1,5 +1,3 @@
-#!/usr/bin/python3.7
-# -*- coding: UTF-8 -*
 last_id = 0
 class Client:
     def __init__(self,nom,cognom,telefon,correu,adreca,ciutat):
